@@ -1,0 +1,13 @@
+random.seed: 42
+# num.agents: 6
+# stop.at: 744
+stop.at: 744
+# stop.at: 24
+employee.count: 15
+employee.min_working_hours_per_week: 10
+employee.max_working_hours_per_week: 40
+employee.home_office_rate: 0.66
+world.width: 100
+world.height: 50
+meet_log_file: 'output/meet_log.csv'
+agent_log_file: 'output/agent_log.csv'
