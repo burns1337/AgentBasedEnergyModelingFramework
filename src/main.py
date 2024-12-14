@@ -248,17 +248,16 @@ def main():
     run_energyplus_simulation(args)
 
     # ----- ABM simulation with Repast4Py to get the agent objects with the desired parameters (temperature preferences depending on outdoor temperature) -----
-    # abm_simulation = ABMSimulationRunner(args)
-    # abm_simulation.run_simulation()
+    abm_simulation = ABMSimulationRunner(args)
+    abm_simulation.run_simulation()
     #TODO check if the abm simulation is successful or not and if not, then use the default abm simulation output file
-    # plot_occupancy()
+    plot_occupancy()
     analyse_results()
     check_prediction_args_and_apply_them(args)
 
     plot_temperatures()
     plot_cooling_load()
 
-    #TODO activate the optimization of the AC energy consumption
     optimize_AC_energy_consumption()
 
     in_the_end_clean_up()

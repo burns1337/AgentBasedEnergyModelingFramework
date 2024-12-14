@@ -24,6 +24,7 @@ It fetches also the weather forecast from the OpenWeatherMap API and uses it to 
 - install the other packages with `pip install -r requirements.txt`
 
 ## CLI Program Flowchart
+![img.png](img.png)
 
                                       +---------------+
                                       |  main()      |
