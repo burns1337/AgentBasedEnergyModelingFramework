@@ -80,3 +80,18 @@ def get_eplus_output_for_single_lstm():
     eplus_output_df["THERMAL ZONE 1:Zone People Occupant Count [](Hourly)"] = eplus_output_df["THERMAL ZONE 1:Zone People Occupant Count [](Hourly)"].round()  # make occupancy count natural numbers
     eplus_output_df = convert_eplus_index_to_datetime(eplus_output_df)
     return eplus_output_df
+
+# def get_eplus_output_for_get_cooling_load_for_august ():
+#     file_path = Path(Path().cwd().parent, 'src/output/eplusout.csv')
+#     with open(file_path) as f:
+#         eplus_output_df = pd.read_csv(f, header=0, index_col=0)
+#     eplus_output_df["THERMAL ZONE 1:Zone People Occupant Count [](Hourly)"] = eplus_output_df["THERMAL ZONE 1:Zone People Occupant Count [](Hourly)"].round()  # make occupancy count natural numbers
+#     eplus_output_df = convert_eplus_index_to_datetime(eplus_output_df)
+#     return eplus_output_df
+
+
+def get_cooling_load_for_august(eplus_df):
+    eplus_df['Date/Time'] = pd.to_datetime(eplus_df['Date/Time'])
+    eplus_df = eplus_df.set_index('Date/Time')
+    eplus_df = eplus_df.loc['2022-08-01':'2022-08-31']
+    return eplus_df['THERMAL ZONE 1 IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Rate [W](Hourly) ']

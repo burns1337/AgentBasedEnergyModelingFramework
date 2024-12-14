@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
@@ -236,6 +237,57 @@ class DataVisualizer:
         plt.legend()
         plt.grid(True)
         plt.show()
+
+
+    def plot_eplus_cooling_load(self, eplus_df):
+        fig, ax = plt.subplots()
+        ax.plot(eplus_df['THERMAL ZONE 1 IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Rate [W](Hourly) '], label='hourly office cooling load from the E+ simualation')
+        # ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=2))  # Jede Woche ein Tick
+        # ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))  # Datum im gewünschten Format
+
+        # add sum of cooling load to the plot title for better comparison
+        sum_power = eplus_df['THERMAL ZONE 1 IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Rate [W](Hourly) '].sum()
+        ax.set_title(f'E+ simulation (2022) cooling load: {sum_power:.0f} Wh)')
+        plt.xticks(rotation=45)  # X-Achse lesbarer machen durch Rotation
+        ax.set_xlabel('Time')
+        ax.set_ylabel('Cooling Load [W]')
+        plt.tight_layout()  # Layout optimieren
+        ax.legend()
+        plt.show()
+
+    def plot_eplus_cooling_load_from_august(self, eplus_df):
+        fig, ax = plt.subplots()
+        eplus_df_august = eplus_df.loc['2022-08-01':'2022-08-31']
+        ax.plot(eplus_df_august['THERMAL ZONE 1 IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Rate [W](Hourly) '], label='hourly office cooling load from the E+ simualation')
+        # ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=2))  # Jede Woche ein Tick
+        # ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))  # Datum im gewünschten Format
+        sum_power = eplus_df_august['THERMAL ZONE 1 IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Rate [W](Hourly) '].sum()
+        ax.set_title(f'E+ simulation cooling load (Total in August 2022: {sum_power:.0f} Wh)')
+        plt.xticks(rotation=45)  # X-Achse lesbarer machen durch Rotation
+        ax.set_xlabel('Time')
+        ax.set_ylabel('Cooling Load [W]')
+        ax.legend()
+        plt.tight_layout()  # Layout optimieren
+        plt.show()
+
+    def plot_eplus_cooling_load_from_end_of_august(self, eplus_df):
+        fig, ax = plt.subplots()
+        eplus_df_august = eplus_df.loc['2022-08-21':'2022-08-31']
+        ax.plot(eplus_df_august[
+                    'THERMAL ZONE 1 IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Rate [W](Hourly) '],
+                label='hourly office cooling load from the E+ simualation')
+        # ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=7))  # Jede Woche ein Tick
+        # ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))  # Datum im gewünschten Format
+        sum_power = eplus_df_august['THERMAL ZONE 1 IDEAL LOADS AIR SYSTEM:Zone Ideal Loads Zone Total Cooling Rate [W](Hourly) '].sum()
+        ax.set_title(f'E+ simulation cooling load (Total in test period 2022: {sum_power:.0f} Wh)')
+        plt.xticks(rotation=45)  # X-Achse lesbarer machen durch Rotation
+        ax.set_xlabel('Time')
+        ax.set_ylabel('Cooling Load [W]')
+        ax.legend()
+        plt.tight_layout()  # Layout optimieren
+        plt.show()
+
+
 
 
 

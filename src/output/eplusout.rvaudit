@@ -1,0 +1,13 @@
+ ReadVarsESO
+ processing:./small_office_TUGinff_variated_schedule_medium_occupancy.rvi
+ input file:output/eplusout.eso
+ output file:output/eplusout.csv
+ getting all vars from:output/eplusout.eso
+  number variables requested for output=           8
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:./small_office_TUGinff_variated_schedule_medium_occupancy.mvi
+ Requested ESO file=output/eplusout.mtr
+ does not exist.  ReadVarsESO program terminated.
+ ReadVarsESO program terminated.

@@ -28,7 +28,8 @@ from utils.Functions import *
 
 from analysis_tool.data_visualizer import DataVisualizer
 from predictions.lstm_predictor import LSTM_Predictor
-from predictions.cooling_load_optimizer import predict_horizon_hours_from_start_index_with_given_cooling_load
+from predictions.cooling_load_optimizer import CoolingLoadOptimizer
+# from predictions.cooling_load_optimizer import predict_horizon_hours_from_start_index_with_given_cooling_load
 
 
 
@@ -197,6 +198,18 @@ def plot_temperatures():
 
     data_visualizer.plot_indoor_temperature_comparison_simple(eplus_output_df_indoor_temp, sensors_temperatures_indoor_df_resample_60min, lstm_predictions_df, start_date, end_date)
 
+def plot_cooling_load():
+    data_visualizer = DataVisualizer()
+    eplus_output_df = get_eplus_output()
+    # start_date = '2022-08-01 00:00:00'  # '2022-08-19 19:00:00'
+    # end_date = '2022-08-31 00:00:00'
+
+    # plot the cooling load
+    data_visualizer.plot_eplus_cooling_load(eplus_output_df)
+    data_visualizer.plot_eplus_cooling_load_from_august(eplus_output_df)
+    data_visualizer.plot_eplus_cooling_load_from_end_of_august(eplus_output_df)
+
+
 
 def analyse_results():
     # ------- comparison of the ABM and EPLUS simulation results -------
@@ -207,7 +220,8 @@ def analyse_results():
 
 def optimize_AC_energy_consumption():
     # ------- optimization of the AC energy consumption -------
-    optimization = predict_horizon_hours_from_start_index_with_given_cooling_load()
+    optimizer = CoolingLoadOptimizer()
+    optimizer.run_main()
 
 
 def in_the_end_clean_up():
@@ -226,7 +240,7 @@ def main():
     # ----------- load past und forecast weather data -----------
     weather_fetcher = WeatherFetcher(location_choosen)
     weather_fetcher.run_weather_fetcher()
-    # weather_fetcher.init_pyowm_and_get_weather()
+    weather_fetcher.init_pyowm_and_get_weather()
     # weather_fetcher.get_meteostat_weather()
     #todo complex/large effort: convert weather data to a .epw file OR get latest up2date epw files from austrian cities;
 
@@ -234,15 +248,17 @@ def main():
     run_energyplus_simulation(args)
 
     # ----- ABM simulation with Repast4Py to get the agent objects with the desired parameters (temperature preferences depending on outdoor temperature) -----
-    abm_simulation = ABMSimulationRunner(args)
-    abm_simulation.run_simulation()
+    # abm_simulation = ABMSimulationRunner(args)
+    # abm_simulation.run_simulation()
     #TODO check if the abm simulation is successful or not and if not, then use the default abm simulation output file
-    plot_occupancy()
+    # plot_occupancy()
     analyse_results()
     check_prediction_args_and_apply_them(args)
 
     plot_temperatures()
+    plot_cooling_load()
 
+    #TODO activate the optimization of the AC energy consumption
     optimize_AC_energy_consumption()
 
     in_the_end_clean_up()

@@ -23,6 +23,114 @@ It fetches also the weather forecast from the OpenWeatherMap API and uses it to 
   - `env CC=mpicxx pip install repast4py`
 - install the other packages with `pip install -r requirements.txt`
 
+## CLI Program Flowchart
+
+                                      +---------------+
+                                      |  main()      |
+                                      +---------------+
+                                             |
+                                             |
+                                             v
+                                      +-----------------------+
+                                      |  init_argparse()      |
+                                      |  (parse command line  |
+                                      |   arguments)          |
+                                      +-----------------------+
+                                             |
+                                             |
+                                             v
+                                      +-----------------------+
+                                      |  LocationHandler      |
+                                      |  (get location from   |
+                                      |   CLI flag, EPW file, |
+                                      |   or IDF file)        |
+                                      +-----------------------+
+                                             |
+                                             |
+                                             v
+                                      +-------------------------------------------------+
+                                      |  fetch_epw_file_and_save_it_and_the_location()  |
+                                      |  (fetch EPW file and save it)                   |
+                                      +-------------------------------------------------+
+                                             |
+                                             |
+                                             v
+                                      +---------------------------+
+                                      |  WeatherFetcher           |
+                                      |  (load past and forecast  |
+                                      |   weather data)           |
+                                      +---------------------------+
+                                             |
+                                             |
+                                             v
+                                      +-------------------------------+
+                                      |  run_energyplus_simulation()  |
+                                      |  (run EnergyPlus simulations) |
+                                      +-------------------------------+
+                                             |
+                                             |
+                                             v
+                                      +--------------------------+
+                                      |  ABMSimulationRunner     |
+                                      |  (run ABM simulation)    |
+                                      +--------------------------+
+                                             |
+                                             |
+                                             v
+                                      +------------------------+
+                                      |  plot_occupancy()      |
+                                      |  (plot occupancy)      |
+                                      +------------------------+
+                                             |
+                                             |
+                                             v
+                                      +-----------------------+
+                                      |  analyse_results()    |
+                                      |  (analyze results)    |
+                                      +-----------------------+
+                                             |
+                                             |
+                                             v
+                                      +------------------------------------------+
+                                      |  check_prediction_args_and_apply_them()  |
+                                      |  (check prediction arguments and         |
+                                      |   apply them)                            |
+                                      +------------------------------------------+
+                                             |
+                                             |
+                                             v
+                                      +-----------------------+
+                                      |  plot_temperatures()  |
+                                      |  (plot temperatures)  |
+                                      +-----------------------+
+                                             |
+                                             |
+                                             v
+                                      +-----------------------+
+                                      |  plot_cooling_load()  |
+                                      +-----------------------+
+                                             |
+                                             |
+                                             v
+                                      +------------------------------------+
+                                      |  optimize_AC_energy_consumption()  |
+                                      +------------------------------------+
+                                             |
+                                             |
+                                             v
+                                      +-------------------------+
+                                      |  in_the_end_clean_up()  |
+                                      |  (clean up)             |
+                                      +-------------------------+
+                                             |
+                                             |
+                                             v
+                                      +----------------------+
+                                      |  print("Done.")      |
+                                      +----------------------+
+
+
+
 ## Usage
 - The main file is the `main.py` file. It can be run with `python main.py --location Burgos` or e.g. `python3 main.py -i small_office_TUGinff_variated_schedule_medium_occupancy.idf -e AUT_ST_Graz.Univ.112900_TMYx.epw`
 - The `main.py` file contains the main function that runs the room surrogate model.
