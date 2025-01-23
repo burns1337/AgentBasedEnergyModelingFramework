@@ -157,10 +157,18 @@ It fetches also the weather forecast from the OpenWeatherMap API and uses it to 
 
     
 ## Notes on the latest files
-- LSTM model in LSTM_many_hours.ipynb
+- base LSTM model in LSTM_many_hours.ipynb
 - latest file: eppy_multi_run_with_plots_2022_final.ipynb
 - simulation results (100 x LHS) in folfder 'simulations_own_schedule_24_final_2'
 -- derived from final_office_IdealLoad_summer_tiny_hourly_own_schedule_24_final_2.idf
 
-### General Notes
-- when appending csvs, shuffle=False is important, otherwise the order of the data is not preserved. 
+## Feedback
+If you have any feedback, please let me know via an Issue or email.
+
+# Donate
+If you like this project, please consider donating me a coffee.
+
+[![buymeacoffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/burns1337)
+
+# Star
+If you like this project, please consider starring the repository.
