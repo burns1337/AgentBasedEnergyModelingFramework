@@ -23,6 +23,22 @@ It fetches also the weather forecast from the OpenWeatherMap API and uses it to 
   - `env CC=mpicxx pip install repast4py`
 - install the other packages with `pip install -r requirements.txt`
 
+## Docker Installation
+- install Docker on your system
+- build the docker image with `docker build -t energy-modeling .`
+- run the docker container with `docker run -it --name energy-modeling energy-modeling`
+- run the main.py file with `python src/main.py`
+
+### Build the Docker image
+docker compose build
+
+### Run the application with default parameters
+docker compose up
+
+### Or run with specific command-line arguments
+docker compose run energy-modeling python src/main.py --location "Graz" --lstm
+
+
 ## CLI Program Flowchart
 ![img.png](img.png)
 

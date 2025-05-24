@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  energy-modeling:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      # Mount project files for development (can be commented out for production)
+      - ./data:/app/data
+      - ./output:/app/output
+      # Mount a volume for simulation results
+      - energy_model_results:/app/results
+    environment:
+      - DISPLAY=:99
+    # Pass any command line arguments to the container
+    # Usage: docker-compose run energy-modeling python src/main.py [args]
+    command: python src/main.py
+
+volumes:
+  energy_model_results:

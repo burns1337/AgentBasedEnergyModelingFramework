@@ -1,0 +1,17 @@
+torch~=2.7.0
+numpy
+pandas
+scikit-learn
+matplotlib
+eppy
+geopy
+rapidfuzz
+argcomplete
+selenium
+webdriver_manager
+mpi4py
+SALib
+plotly
+pyqtgraph
+pyqt5
+repast4py
