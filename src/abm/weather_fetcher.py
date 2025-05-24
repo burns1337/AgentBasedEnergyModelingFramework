@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 import requests
 from functools import wraps
-from pyowm.owm import OWM
+# from pyowm.owm import OWM
 from meteostat import Point, Daily, Hourly, Stations
 
 # ----------- load past und forecast weather data. run:  -----------
@@ -46,7 +46,7 @@ class WeatherFetcher:
         load_dotenv()
         self.api_key = os.getenv("API_KEY")
         # OpenWeatherMap API-Key
-        self.owm = OWM(self.api_key)
+        # self.owm = OWM(self.api_key)
         self.city = chosen_location
 
         city_graz = "Graz"
@@ -277,16 +277,16 @@ class WeatherFetcher:
         self.get_next_n_hours_outdoor_temperature_api_3(12)
         return 0
 
-    def init_pyowm_and_get_weather(self):
-        # Standort festlegen (z.B. Wien)
-        mgr = self.owm.weather_manager()
-        # all_stations = mgr.get_stations()
-        # pprint(all_stations)
-        # station_id_graz = 2778067
-        weather = mgr.weather_at_place('Vienna,AT').weather
-        # weather_day = mgr.station_day_history(station_id_graz)
-        print("\n Wetterdaten pyowm:")
-        print(weather, "\n")
+    # def init_pyowm_and_get_weather(self):
+    #     # Standort festlegen (z.B. Wien)
+    #     mgr = self.owm.weather_manager()
+    #     # all_stations = mgr.get_stations()
+    #     # pprint(all_stations)
+    #     # station_id_graz = 2778067
+    #     weather = mgr.weather_at_place('Vienna,AT').weather
+    #     # weather_day = mgr.station_day_history(station_id_graz)
+    #     print("\n Wetterdaten pyowm:")
+    #     print(weather, "\n")
 
     def get_meteostat_weather(self):
         """ Fetches weather data from the Meteostat API for a given city."""
